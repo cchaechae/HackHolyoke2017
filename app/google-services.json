@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "582912563780",
+    "firebase_url": "https://hackholyoke2017.firebaseio.com",
+    "project_id": "hackholyoke2017",
+    "storage_bucket": "hackholyoke2017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582912563780:android:253f741097aced23",
+        "android_client_info": {
+          "package_name": "fall17.hackholyoke.mytempcloset"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582912563780-gaq47fc203tbriv23p061qu4kqkvd6lq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fall17.hackholyoke.mytempcloset",
+            "certificate_hash": "ed18841088bdb5a12ce01393ad630cf745872bc8"
+          }
+        },
+        {
+          "client_id": "582912563780-p8851ubcqlvn77t9vgp3qsgmddljk1f7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwFQIoV2nR1mtXnuJVkl61ozSokpuG4Dc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582912563780-p8851ubcqlvn77t9vgp3qsgmddljk1f7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
