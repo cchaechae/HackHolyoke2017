@@ -50,7 +50,7 @@ public class MyClosetActivity extends AppCompatActivity {
         ((MainApplication)getApplication()).openRealm();
 
         RealmResults<Clothing> allClothings = getRealm().where(Clothing.class).findAll();
-        deleteAll();
+        //deleteAll();
         Clothing ClothingsArray[] = new Clothing[allClothings.size()];
         List<Clothing> ClothingsResult = new ArrayList<Clothing>(Arrays.asList(allClothings.toArray(ClothingsArray)));
 
@@ -73,7 +73,7 @@ public class MyClosetActivity extends AppCompatActivity {
                         PhotoReadyActivity.KEY_ITEM);
 
                 Clothing Clothing = getRealm().where(Clothing.class)
-                        .equalTo("ClothingID", ClothingID)
+                        .equalTo("clothingID", ClothingID)
                         .findFirst();
 
                 if (requestCode == REQUEST_NEW_Clothing) {
