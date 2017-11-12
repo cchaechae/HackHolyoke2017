@@ -18,14 +18,14 @@ public class Clothing extends RealmObject {
     int lowTemp;
     int highTemp;
 
-    byte[] imageByte;
+    String imgPath;
 
-    public byte[] getImageByte() {
-        return imageByte;
+    public String getImgPath() {
+        return imgPath;
     }
 
-    public void setImageByte(byte[] imageByte) {
-        this.imageByte = imageByte;
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
     }
 
     public int getClothingType() {

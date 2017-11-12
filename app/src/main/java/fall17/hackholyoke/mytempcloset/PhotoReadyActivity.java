@@ -1,5 +1,7 @@
 package fall17.hackholyoke.mytempcloset;
 
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Rating;
@@ -17,6 +19,8 @@ import android.widget.RatingBar;
 import android.widget.Spinner;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -108,10 +112,12 @@ public class PhotoReadyActivity extends AppCompatActivity {
         getRealm().beginTransaction();
         clothingToSave.setNumStars(ratingBar.getNumStars());
         // saving the image
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageInBytes = baos.toByteArray();
-        clothingToSave.setImageByte(imageInBytes);
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        img.compress(Bitmap.CompressFormat.JPEG, 200, baos);
+//        byte[] imageInBytes = baos.toByteArray();
+//        clothingToSave.setImageByte(imageInBytes);
+        String path = saveToInternalStorage(img);
+        clothingToSave.setImgPath(path);
         clothingToSave.setClothingType(spinnerItemType.getSelectedItemPosition());
         getRealm().commitTransaction();
 
@@ -122,7 +128,29 @@ public class PhotoReadyActivity extends AppCompatActivity {
 
     }
 
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath=new File(directory,clothingToSave.getclothingID()+".jpeg");
 
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
+    }
 
 
 }
