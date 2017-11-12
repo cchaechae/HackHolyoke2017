@@ -1,5 +1,6 @@
 package fall17.hackholyoke.mytempcloset;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -38,7 +39,9 @@ public class MainActivity extends AppCompatActivity {
 
     private String typedName = "South Hadley";
     private GoogleApiClient client;
-    List<Clothing> clothesResult;
+    ArrayList<Clothing> clothesResult;
+    Closet closet;
+    Double currTemp = Double.valueOf(0.0);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
     final TextView tvTemp = (TextView) findViewById(R.id.tvDegree);
     final Button btnViewCloset = (Button) findViewById(R.id.btnViewCloset);
     final Button btnDonate = (Button) findViewById(R.id.btnDonate);
+    final ImageView ivTop = (ImageView) findViewById(R.id.ivTop);
+    final ImageView ivBottom = (ImageView) findViewById(R.id.ivBottom);
+
 
 
     btnViewCloset.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
         Clothing itemArray[] = new Clothing[allItems.size()];
         clothesResult = new ArrayList<Clothing>(Arrays.asList(allItems.toArray(itemArray)));
 
+        closet = new Closet(clothesResult);
+
+
     Call<WeatherResult> callCity = weatherAPI.getCity(typedName, "imperial", "5383244a95768c470e7ed26d17ba9677");
     callCity.enqueue(new Callback<WeatherResult>(){
 
@@ -92,7 +101,8 @@ public class MainActivity extends AppCompatActivity {
             //String description = response.body().getWeather().get(0).getDescription().toUpperCase();
             //tvDescribe.setText(description);
 
-            tvTemp.setText(res.getString(R.string.degrees, df.format(response.body().getMain().getTemp())));
+            currTemp = response.body().getMain().getTemp();
+            tvTemp.setText(res.getString(R.string.degrees, df.format(currTemp)));
 
             Glide.with(MainActivity.this).load("http://api.openweathermap.org/img/w/" + response.body().getWeather().get(0).getIcon() + ".png").into(ivIcon);
         }
@@ -109,7 +119,20 @@ public class MainActivity extends AppCompatActivity {
     // ATTENTION: This was auto-generated to implement the App Indexing API.
     // See https://g.co/AppIndexing/AndroidStudio for more information.
     client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+
+    String path = closet.recommendTop(currTemp).getImgPath();
+    Context c = getApplicationContext();
+    int id = c.getResources().getIdentifier("drawable/"+path, null, c.getPackageName());
+    ivTop.setImageResource(id);
+
+
     }
+
+    public static int getImageId(Context context, String imageName) {
+        return context.getResources().getIdentifier("drawable/" + imageName, null, context.getPackageName());
+    }
+
     public Realm getRealm() {
         return ((MainApplication)getApplication()).getRealmItems();
     }
