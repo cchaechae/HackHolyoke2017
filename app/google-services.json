@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "582912563780-sducfosq5t6rp2sl50t41blaj5shd0vm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fall17.hackholyoke.mytempcloset",
+            "certificate_hash": "5b8096e9009d33999eec77fbceadc1ec6fa70360"
+          }
+        },
+        {
           "client_id": "582912563780-gaq47fc203tbriv23p061qu4kqkvd6lq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

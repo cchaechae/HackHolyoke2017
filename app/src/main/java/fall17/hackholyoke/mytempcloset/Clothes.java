@@ -5,4 +5,5 @@ package fall17.hackholyoke.mytempcloset;
  */
 
 public class Clothes {
+
 }

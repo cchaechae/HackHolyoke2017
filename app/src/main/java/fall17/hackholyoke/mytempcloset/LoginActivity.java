@@ -1,6 +1,5 @@
 package fall17.hackholyoke.mytempcloset;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
