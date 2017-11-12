@@ -36,11 +36,22 @@
 
     </LinearLayout>
 
+
+    <TextView
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="What To Wear Today?"
+        android:textSize="20sp"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
 
         <ImageView
             android:layout_width="match_parent"
@@ -59,13 +70,28 @@
 
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnViewCloset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center"
+            android:text="View My Closet"/>
+
+    <Button
+        android:id="@+id/btnDonate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvCityName"
-        android:paddingTop="15dp"
-        android:text="City name"
-        android:textAlignment="center"
-        android:textSize="23sp"/>
+        android:layout_alignBottom="@id/btnViewCloset"
+        android:layout_gravity="center_horizontal|center"
+        android:text="Donate My Clothes"/>
+
+    </LinearLayout>
 
 </LinearLayout>

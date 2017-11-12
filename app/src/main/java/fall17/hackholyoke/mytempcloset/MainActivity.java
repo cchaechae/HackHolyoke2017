@@ -1,9 +1,12 @@
 package fall17.hackholyoke.mytempcloset;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,9 +17,16 @@ import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
+import fall17.hackholyoke.mytempcloset.data.Closet;
+import fall17.hackholyoke.mytempcloset.data.Clothing;
 import fall17.hackholyoke.mytempcloset.data.WeatherResult;
 import fall17.hackholyoke.mytempcloset.network.WeatherAPI;
+import io.realm.Realm;
+import io.realm.RealmResults;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String typedName = "South Hadley";
     private GoogleApiClient client;
+    List<Clothing> clothesResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +55,31 @@ public class MainActivity extends AppCompatActivity {
     //make final text view variables
     final ImageView ivIcon = (ImageView) findViewById(R.id.ivIcon);
     final TextView tvTemp = (TextView) findViewById(R.id.tvDegree);
+    final Button btnViewCloset = (Button) findViewById(R.id.btnViewCloset);
+    final Button btnDonate = (Button) findViewById(R.id.btnDonate);
+
+
+    btnViewCloset.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent i = new Intent(MainActivity.this, MyClosetActivity.class);
+            startActivity(i);
+        }
+    });
+
+    btnDonate.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent i = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(i);
+        }
+    });
+
+        ((MainApplication)getApplication()).openRealm();
+
+        RealmResults<Clothing> allItems = getRealm().where(Clothing.class).findAll();
+        Clothing itemArray[] = new Clothing[allItems.size()];
+        clothesResult = new ArrayList<Clothing>(Arrays.asList(allItems.toArray(itemArray)));
 
     Call<WeatherResult> callCity = weatherAPI.getCity(typedName, "imperial", "5383244a95768c470e7ed26d17ba9677");
     callCity.enqueue(new Callback<WeatherResult>(){
@@ -74,7 +110,9 @@ public class MainActivity extends AppCompatActivity {
     // See https://g.co/AppIndexing/AndroidStudio for more information.
     client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
-
+    public Realm getRealm() {
+        return ((MainApplication)getApplication()).getRealmItems();
+    }
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.

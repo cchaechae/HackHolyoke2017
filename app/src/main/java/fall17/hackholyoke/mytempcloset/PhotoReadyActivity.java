@@ -71,7 +71,6 @@ public class PhotoReadyActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     @Override

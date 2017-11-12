@@ -15,8 +15,8 @@ import io.realm.annotations.PrimaryKey;
 public class Clothing extends RealmObject {
 
     int numStars;
-    int lowTemp;
-    int highTemp;
+    Double temp;
+    //int highTemp;
 
     String imgPath;
 
@@ -39,8 +39,6 @@ public class Clothing extends RealmObject {
     private int clothingType;
     @PrimaryKey
     private String clothingID;
-
-
 
 
     public String getclothingID() {
@@ -67,20 +65,12 @@ public class Clothing extends RealmObject {
         this.numStars = numStars;
     }
 
-    public int getLowTemp() {
-        return lowTemp;
+    public Double getTemp() {
+        return temp;
     }
 
-    public void setLowTemp(int lowTemp) {
-        this.lowTemp = lowTemp;
-    }
-
-    public int getHighTemp() {
-        return highTemp;
-    }
-
-    public void setHighTemp(int highTemp) {
-        this.highTemp = highTemp;
+    public void setTemp(Double temp) {
+        this.temp = temp;
     }
 
 //    public ImageView getImage() {
@@ -103,7 +93,7 @@ public class Clothing extends RealmObject {
         public int getValue() {
             return value;
         }
-        
+
 
         public static ClothingType fromInt(int value) {
             for (ClothingType p : ClothingType.values()) {
@@ -117,8 +107,9 @@ public class Clothing extends RealmObject {
 
     public Clothing(){}
 
-    public Clothing(int numStars, ImageView image){
+    public Clothing(int numStars, ImageView image, Double temp){
         this.numStars = numStars;
+        this.temp = temp;
 //        this.image = image;
     }
 
