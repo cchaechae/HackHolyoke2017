@@ -2,6 +2,15 @@
     <string name="app_name">My Temp Closet</string>
     <string name="title_activity_login">Sign in</string>
 
+    <string name="temp"> Temperature: %1$f</string>
+    <string name="degrees">%1$s°F</string>
+    <string name="humidity"> Humidity: %1$s </string>
+    <string name="wind"> Wind: %1$sm/s </string>
+    <string name="about"> Made by Crystal Seo </string>
+    <string name="clouds"> Clouds: %1$s </string>
+    <string name="pressure"> Pressure: %1$s hpa</string>
+    <string name="action_hide">Hide</string>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
